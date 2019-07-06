@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faPlus } from '@fortawesome/free-solid-svg-icons'; //Import icons by name
 
 @Component({
   selector: 'admin-component',
@@ -10,6 +11,15 @@ export class AdminComponentComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  //Create icon variables;
+  faPlus = faPlus;
+
+
+  //Add task
+  addTask(){
+    alert('here')
   }
 
 }

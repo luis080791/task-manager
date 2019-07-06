@@ -1,0 +1,13 @@
+.list{
+    height: 8vh;
+    background: #e9ecef;    
+}
+.task_list{
+    height: 77vh;
+}
+.row{
+    margin: 0;
+}
+.col-md-4{
+    padding: 0;    
+}

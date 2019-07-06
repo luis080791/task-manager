@@ -1,0 +1,19 @@
+.header{
+    background: #1b39a8;
+    height: 15vh;
+}
+.side{
+    height: 15vh;
+    position: relative;
+}
+.head{
+    height: 15vh;
+    position: relative;
+}
+.plus{
+    stroke: #fff;
+    color: #fff;
+}
+.title{
+    color: #fff;
+}

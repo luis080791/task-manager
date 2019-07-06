@@ -1,1 +1,16 @@
-<p>admin-component works!</p>
+<div class="header col">
+    <div class="row">
+        <div class="col-3 col-sm-2 col-md-1 col-lg-1 col-xl-1 side">
+            <div class="center_to_center" (click)="addTask()">
+                <fa-icon [icon]="faPlus" class="plus" size="2x"></fa-icon>
+            </div>                
+        </div>
+        <div class="col-9 col-sm-10 col-md-11 col-lg-11 col-xl-11 head">
+            <div class="center_to_center" (click)="addTask()">
+                <h3 class="title">Managment Task</h3>
+            </div>
+        </div>
+    </div>    
+</div>
+
+<list-component></list-component>
