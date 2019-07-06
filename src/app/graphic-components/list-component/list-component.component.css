@@ -5,9 +5,6 @@
 .task_list{
     height: 77vh;
 }
-.row{
-    margin: 0;
-}
 .col-md{
     padding: 0;    
 }
@@ -16,6 +13,9 @@
 }
 .col-xl{
     padding: 0;    
+}
+.row{
+  margin: 0
 }
 
 
@@ -40,7 +40,7 @@
   }
   
   .example-box {
-    padding: 50px 10px;
+    padding: 10px 10px;
     border: solid 1px #ccc;
     color: rgba(0, 0, 0, 0.87);
     display: flex;

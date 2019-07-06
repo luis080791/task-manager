@@ -14,7 +14,7 @@
             class="example-list" (cdkDropListDropped)="drop($event)"
         >
             <div class="example-box" *ngFor="let item of todo" cdkDrag>
-                <card-component [yyy]="item"></card-component>
+                <card-component [task]="item"></card-component>
             </div>
         </div>
     </div>
@@ -26,7 +26,7 @@
             class="example-list" (cdkDropListDropped)="drop($event)"
         >
             <div class="example-box" *ngFor="let item of inprogress" cdkDrag>
-                <card-component [yyy]="item"></card-component>
+                <card-component [task]="item"></card-component>
             </div>
         </div>
     </div>
@@ -37,7 +37,7 @@
             class="example-list" (cdkDropListDropped)="drop($event)"
         >
             <div class="example-box" *ngFor="let item of done" cdkDrag>
-                <card-component [yyy]="item"></card-component>
+                <card-component [task]="item"></card-component>
             </div>
         </div>
     </div>

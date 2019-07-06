@@ -16,10 +16,12 @@ export class AdminComponentComponent implements OnInit {
   //Create icon variables;
   faPlus = faPlus;
 
+  //Another constants
+  task_action = 'Add task'
 
-  //Add task
-  addTask(){
-    alert('here')
+  create(){
+    console.log('Create')
+    $('#task').modal('hide')
   }
 
 }

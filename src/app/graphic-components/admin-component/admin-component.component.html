@@ -1,12 +1,12 @@
 <div class="header">
     <div class="row">
         <div class="col-3 col-sm-2 col-md-1 col-lg-1 col-xl-1 side">
-            <div class="center_to_center" (click)="addTask()">
+            <div class="center_to_center" data-toggle="modal" data-target="#task">
                 <fa-icon [icon]="faPlus" class="plus" size="2x"></fa-icon>
             </div>                
         </div>
         <div class="col-9 col-sm-10 col-md-11 col-lg-11 col-xl-11 head">
-            <div class="center_to_center" (click)="addTask()">
+            <div class="center_to_center">
                 <h3 class="title">Managment Task</h3>
             </div>
         </div>
@@ -15,3 +15,48 @@
 
 <list-component></list-component>
 
+<!-- Modal task info -->
+<div class="modal fade" id="task" tabindex="-1" role="dialog" aria-labelledby="task-info" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create task</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Name:</label>
+                        <input type="text" class="form-control" id="recipient-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Description:</label>
+                        <textarea class="form-control" rows="5" id="comment"></textarea>                
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Estimate:</label>
+                                <input type="number" class="form-control" id="recipient-name">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">State:</label>
+                                <select class="form-control" id="sel1">
+                                    <option *ngFor="let state of states" (onClick)="alert('here')">{{state.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" (click)="create()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
