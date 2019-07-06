@@ -11,20 +11,22 @@ import { AdminComponentComponent } from './graphic-components/admin-component/ad
  
 //Downloaded settings
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { CenterToCenterComponent } from './tag-components/center-to-center/center-to-center.component'
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
     AppComponent,
     CardComponentComponent,
     ListComponentComponent,
-    AdminComponentComponent,
-    CenterToCenterComponent
+    AdminComponentComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    BrowserAnimationsModule,
+    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]

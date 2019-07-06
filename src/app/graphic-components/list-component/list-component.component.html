@@ -1,10 +1,45 @@
 <div class="row">
-    <div *ngFor="let state of states" class="col-md-4 col-lg-4 col-xl-4 list">
+    <div *ngFor="let item of items" class="col-md col-lg col-xl list">
         <div class="center_to_center">
-            {{ state.name }}
-        </div> 
-        <div class="task_list">
-
-        </div>        
+            <h5>{{ item.name }}</h5>
+        </div>
     </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md col-lg col-xl ">
+        <div cdkDropList  #todoList="cdkDropList"  [cdkDropListData]="todo"
+            [cdkDropListConnectedTo]="[doneList, inprogressList]"
+            class="example-list" (cdkDropListDropped)="drop($event)"
+        >
+            <div class="example-box" *ngFor="let item of todo" cdkDrag>
+                <card-component [yyy]="item"></card-component>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md col-lg col-xl">
+        <div cdkDropList #inprogressList="cdkDropList" [cdkDropListData]="inprogress"
+            [cdkDropListConnectedTo]="[todoList, doneList]"
+            class="example-list" (cdkDropListDropped)="drop($event)"
+        >
+            <div class="example-box" *ngFor="let item of inprogress" cdkDrag>
+                <card-component [yyy]="item"></card-component>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md col-lg col-xl">
+        <div cdkDropList  #doneList="cdkDropList"
+            [cdkDropListData]="done" [cdkDropListConnectedTo]="[todoList, inprogressList]"
+            class="example-list" (cdkDropListDropped)="drop($event)"
+        >
+            <div class="example-box" *ngFor="let item of done" cdkDrag>
+                <card-component [yyy]="item"></card-component>
+            </div>
+        </div>
+    </div>
+
 </div>
