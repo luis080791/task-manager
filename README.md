@@ -1,9 +1,9 @@
 # TaskManager
 
-cd task-manager
+$ cd task-manager
 
-npm install
+$ npm install
 
-ng serve
+% ng serve
 
 Open localhost:4200
