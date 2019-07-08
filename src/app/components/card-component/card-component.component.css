@@ -1,4 +1,55 @@
 
+.container_task_card{
+    width: 100%;    
+    padding: 3vh;
+    position: relative;
+}
+.task_card{
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    height: 20vh;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .option_task{
     height: 10vh;
     position: relative;

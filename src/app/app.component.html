@@ -1,6 +1,161 @@
-<admin-component class="d-none d-md-block"></admin-component>
+<!-- HEADER -->
+<div class="d-none d-md-block">
+    <div class="d-none d-md-block">
+        <div class="header">
+            <div class="row">
+                <div class="col-3 col-sm-2 col-md-1 col-lg-1 col-xl-1 side">
+                    <div class="center_to_center">
+                        <i class="fa fa-plus-square icon_plus" (click)="flagAddT(contentInfo)"></i>
+                    </div>                
+                </div>
+                <div class="col-9 col-sm-10 col-md-11 col-lg-11 col-xl-11 head">
+                    <div class="center_to_center">
+                        <h3 class="title">Managment Task</h3>
+                    </div>
+                </div>
+            </div>    
+        </div>
+    </div>
 
 
+    <!-- TABLE -->
+    <div class="row">
+        <div *ngFor="let item of states" class="col-md col-lg col-xl list">
+            <div class="center_to_center">
+                <h5 class="align_txt">{{ item.name }}</h5>
+                <h6 class="align_txt">{{ item.hrs }} hrs</h6>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md col-lg col-xl ">
+            <div cdkDropList  #todoList="cdkDropList"  [cdkDropListData]="todo.ids"
+                [cdkDropListConnectedTo]="[doneList, inprogressList]"
+                class="example-list" (cdkDropListDropped)="drop($event, todo)"
+            >
+                <div class="example-box" *ngFor="let item of todo.ids" cdkDrag>
+                    <div class="card">    
+                        {{item.id}}
+                        <div class="card-body">
+                            <h5 class="card-title">{{limitTxt(item.name, 'name')}}</h5>
+                            <p class="card-text">{{limitTxt(item.description, 'des')}}</p>                        
+                            <div class="d-flex flex-row-reverse">            
+                                <button type="button" class="btn btn-sm" (click)="flagEditT(item, todo.id, contentInfo)"><i class="fa fa-edit card_icon"></i></button>
+                                <button type="button" class="btn btn-sm" (click)="undelete(item._id, todo.id, contentTrash)"><i class="fa fa-trash card_icon" ></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md col-lg col-xl">
+            <div cdkDropList #inprogressList="cdkDropList" [cdkDropListData]="inprogress.ids"
+                [cdkDropListConnectedTo]="[todoList, doneList]"
+                class="example-list" (cdkDropListDropped)="drop($event, inprogress)"
+            >
+                <div class="example-box" *ngFor="let item of inprogress.ids" cdkDrag>
+                    <div class="card">    
+                        <div class="card-body">
+                            <h5 class="card-title">{{limitTxt(item.name, 'name')}}</h5>
+                            <p class="card-text">{{limitTxt(item.description, 'des')}}</p>                        
+                            <div class="d-flex flex-row-reverse">            
+                                <button type="button" class="btn btn-sm" (click)="flagEditT(item, inprogress.id, contentInfo)"><i class="fa fa-edit card_icon"></i></button>
+                                <button type="button" class="btn btn-sm" (click)="undelete(item._id, inprogress.id, contentTrash)"><i class="fa fa-trash card_icon" ></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md col-lg col-xl">
+            <div cdkDropList  #doneList="cdkDropList"
+                [cdkDropListData]="done.ids" [cdkDropListConnectedTo]="[todoList, inprogressList]"
+                class="example-list" (cdkDropListDropped)="drop($event, done)"
+            >
+            <div class="example-box" *ngFor="let item of done.ids" cdkDrag>
+                <div class="card">    
+                    <div class="card-body">
+                        <h5 class="card-title">{{limitTxt(item.name, 'name')}}</h5>
+                        <p class="card-text">{{limitTxt(item.description, 'des')}}</p>                    
+                        <div class="d-flex flex-row-reverse">            
+                            <button type="button" class="btn btn-sm" (click)="flagEditT(item, done.id, contentInfo)"><i class="fa fa-edit card_icon"></i></button>
+                            <button type="button" class="btn btn-sm" (click)="undelete(item._id, done.id, contentTrash)"><i class="fa fa-trash card_icon" ></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Message to small screen -->
 <div class="center_to_center d-md-none">
     <h4 class="txt_sorry">Sorry, it is not yet available for mobiles.</h4>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- MODAL ADD-->
+<ng-template #contentInfo let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add task</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Name:</label>
+            <input type="text" class="form-control" id="name" [(ngModel)]="name">
+        </div>
+        <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Description:</label>
+            <textarea class="form-control" rows="5" id="description"  name="description" [(ngModel)]="description"></textarea>                
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Estimate:</label>
+                    <input type="number" min="0" class="form-control" id="estimate"  name="estimate"  [(ngModel)]="estimate">
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">State:</label>
+                    <select class="form-control" id="sel1" name="state_name" [(ngModel)]="state_name" (ngModelChange)="setStateID($event)">
+                        <option *ngFor="let state of states">{{state.name}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="closeModal()">Cancel</button>
+            <button  type="button" class="btn btn-outline-dark" (click)="actionInfo()">Acept</button>                    
+        </div>
+    </div>    
+</ng-template>
+
+<ng-template #contentTrash let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title txt_modal_title" id="modal-basic-title">Delete task</h4>
+    </div>
+    <div class="modal-body">
+        Are you sure you want to delete this task?
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="closeModal()">Cancel</button>
+        <button type="button" class="btn btn-outline-dark" (click)="_deleteTask()">Acept</button>
+    </div>
+</ng-template>
+          

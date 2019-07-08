@@ -1,5 +1,5 @@
 <div class="row">
-    <div *ngFor="let item of items" class="col-md col-lg col-xl list">
+    <div *ngFor="let item of columns" class="col-md col-lg col-xl list">
         <div class="center_to_center">
             <h5>{{ item.name }}</h5>
         </div>
@@ -7,7 +7,6 @@
 </div>
 
 <div class="row">
-
     <div class="col-md col-lg col-xl ">
         <div cdkDropList  #todoList="cdkDropList"  [cdkDropListData]="todo"
             [cdkDropListConnectedTo]="[doneList, inprogressList]"
@@ -37,7 +36,9 @@
             class="example-list" (cdkDropListDropped)="drop($event)"
         >
             <div class="example-box" *ngFor="let item of done" cdkDrag>
+                
                 <card-component [task]="item"></card-component>
+
             </div>
         </div>
     </div>

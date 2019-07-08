@@ -1,0 +1,57 @@
+<div class="header">
+    <div class="row">
+        <div class="col-3 col-sm-2 col-md-1 col-lg-1 col-xl-1 side">
+            <div class="center_to_center">
+                <i class="fa fa-plus-square icon_plus" (click)="open(content)"></i>
+            </div>                
+        </div>
+        <div class="col-9 col-sm-10 col-md-11 col-lg-11 col-xl-11 head">
+            <div class="center_to_center">
+                <h3 class="title">Managment Task</h3>
+            </div>
+        </div>
+    </div>    
+</div>
+
+<list-component></list-component>
+
+<!-- MODAL ADD-->
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add task</h4>
+        <button type="button" class="close" aria-label="Close" (click)="close()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Name:</label>
+            <input type="text" class="form-control" id="name" [(ngModel)]="name">
+        </div>
+        <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Description:</label>
+            <textarea class="form-control" rows="5" id="description"  name="description" [(ngModel)]="description"></textarea>                
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Estimate:</label>
+                    <input type="number" min="0" class="form-control" id="estimate"  name="estimate"  [(ngModel)]="estimate">
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">State:</label>
+                    <select class="form-control" id="sel1" name="state_name" [(ngModel)]="state_name" (ngModelChange)="setStateID($event)">
+                        <option *ngFor="let state of states">{{state.name}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="close()">Cancel</button>
+            <button  type="button" class="btn btn-outline-dark" (click)="create()">Create</button>                    
+        </div>
+    </div>    
+</ng-template>
+  

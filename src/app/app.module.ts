@@ -1,35 +1,36 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-//Created components
-import { CardComponentComponent } from './graphic-components/card-component/card-component.component';
-import { ListComponentComponent } from './graphic-components/list-component/list-component.component';
-import { AdminComponentComponent } from './graphic-components/admin-component/admin-component.component';
- 
-//Downloaded settings
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {DragDropModule} from '@angular/cdk/drag-drop';
+//Services
+import { ApiService } from '../services/api'
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    CardComponentComponent,
-    ListComponentComponent,
-    AdminComponentComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FontAwesomeModule,
-    BrowserAnimationsModule,
-    DragDropModule
+    NgbModule,
+    DragDropModule,
+    HttpClientModule,
+    FormsModule,
+    MatSnackBarModule,
+    BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    ApiService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
