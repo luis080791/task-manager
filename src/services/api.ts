@@ -23,11 +23,26 @@ export class ApiService{
         );
     }
 
-    postStates(){
-        const url = `${this.URL_REQUEST}${'/state/array'}`;
+    postState(state_name:String){
+        const url = `${this.URL_REQUEST}${'/state'}`;
+        const body = 
+            {
+                name: state_name
+            }
         return(  
-            this.state = this.http.get(url, httpOptions)
+            this.state = this.http.post(url, body, httpOptions)
         );
+    }
+
+    putState(state_id: String, state_name:String){
+        const url = `${this.URL_REQUEST}${'/state/'}${state_id}`;
+        const body = 
+            {
+                name: state_name,
+            }
+        return (
+            this.state = this.http.put(url, body, httpOptions)
+        )
     }
 
 

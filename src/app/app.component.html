@@ -1,118 +1,72 @@
-<!-- HEADER -->
+<!-- Content to big devices -->
 <div class="d-none d-md-block">
+    <!-- HEADER -->
     <div class="d-none d-md-block">
         <div class="header">
             <div class="row">
-                <div class="col-3 col-sm-2 col-md-1 col-lg-1 col-xl-1 side">
-                    <div class="center_to_center">
-                        <i class="fa fa-plus-square icon_plus" (click)="flagAddT(contentInfo)"></i>
-                    </div>                
-                </div>
-                <div class="col-9 col-sm-10 col-md-11 col-lg-11 col-xl-11 head">
+                <div class="col-12">
                     <div class="center_to_center">
                         <h3 class="title">Managment Task</h3>
                     </div>
                 </div>
-            </div>    
+            </div>  
+            <div class="row">
+                <div class="option_add">
+                    <button type="button" class="btn btn-outline-light" (click)="stateEdit(contentState, false)">Add state</button>
+                </div>
+                <div class="option_add" *ngIf="array_states.length > 0">
+                    <button type="button" class="btn btn-outline-light" (click)="flagAddT(contentInfo)">Add task</button>
+                </div>
+            </div>  
         </div>
+        
     </div>
 
+    
 
     <!-- TABLE -->
     <div class="row">
-        <div *ngFor="let item of states" class="col-md col-lg col-xl list">
-            <div class="center_to_center">
-                <h5 class="align_txt">{{ item.name }}</h5>
-                <h6 class="align_txt">{{ item.hrs }} hrs</h6>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md col-lg col-xl ">
-            <div cdkDropList  #todoList="cdkDropList"  [cdkDropListData]="todo.ids"
-                [cdkDropListConnectedTo]="[doneList, inprogressList]"
-                class="example-list" (cdkDropListDropped)="drop($event, todo)"
-            >
-                <div class="example-box" *ngFor="let item of todo.ids" cdkDrag>
+        <div *ngFor="let item of array_states" class="col-md col-lg col-xl">
+            <div class="">
+                <div class="list">
+                    <div class="row">
+                        <div class="col-10">
+                            <h5 class="align_txt">{{ item.name }}</h5>
+                            <h6 class="align_txt">{{ item.hrs }} hrs</h6>
+                        </div>
+                        <div class="col-2">
+                            <div class="center_to_center">
+                                <button type="button" class="btn btn-sm" (click)="stateEdit(contentState, true, item)"><i class="fa fa-edit card_icon"></i></button>
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="example-box" *ngFor="let task of item.ids">
                     <div class="card">    
-                        {{item.id}}
                         <div class="card-body">
-                            <h5 class="card-title">{{limitTxt(item.name, 'name')}}</h5>
-                            <p class="card-text">{{limitTxt(item.description, 'des')}}</p>                        
+                            <div class="data_top">
+                                <h5 class="card-title">{{limitTxt(task.name, 'name')}}</h5>
+                                <p class="card-text">{{limitTxt(task.description, 'des')}}</p>   
+                            </div>
+                                             
                             <div class="d-flex flex-row-reverse">            
-                                <button type="button" class="btn btn-sm" (click)="flagEditT(item, todo.id, contentInfo)"><i class="fa fa-edit card_icon"></i></button>
-                                <button type="button" class="btn btn-sm" (click)="undelete(item._id, todo.id, contentTrash)"><i class="fa fa-trash card_icon" ></i></button>
+                                <button type="button" class="btn btn-sm" (click)="flagEditT(task, item.id, contentInfo)"><i class="fa fa-edit card_icon"></i></button>
+                                <button type="button" class="btn btn-sm" (click)="undelete(task._id, item.id, contentTrash)"><i class="fa fa-trash card_icon" ></i></button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="col-md col-lg col-xl">
-            <div cdkDropList #inprogressList="cdkDropList" [cdkDropListData]="inprogress.ids"
-                [cdkDropListConnectedTo]="[todoList, doneList]"
-                class="example-list" (cdkDropListDropped)="drop($event, inprogress)"
-            >
-                <div class="example-box" *ngFor="let item of inprogress.ids" cdkDrag>
-                    <div class="card">    
-                        <div class="card-body">
-                            <h5 class="card-title">{{limitTxt(item.name, 'name')}}</h5>
-                            <p class="card-text">{{limitTxt(item.description, 'des')}}</p>                        
-                            <div class="d-flex flex-row-reverse">            
-                                <button type="button" class="btn btn-sm" (click)="flagEditT(item, inprogress.id, contentInfo)"><i class="fa fa-edit card_icon"></i></button>
-                                <button type="button" class="btn btn-sm" (click)="undelete(item._id, inprogress.id, contentTrash)"><i class="fa fa-trash card_icon" ></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md col-lg col-xl">
-            <div cdkDropList  #doneList="cdkDropList"
-                [cdkDropListData]="done.ids" [cdkDropListConnectedTo]="[todoList, inprogressList]"
-                class="example-list" (cdkDropListDropped)="drop($event, done)"
-            >
-            <div class="example-box" *ngFor="let item of done.ids" cdkDrag>
-                <div class="card">    
-                    <div class="card-body">
-                        <h5 class="card-title">{{limitTxt(item.name, 'name')}}</h5>
-                        <p class="card-text">{{limitTxt(item.description, 'des')}}</p>                    
-                        <div class="d-flex flex-row-reverse">            
-                            <button type="button" class="btn btn-sm" (click)="flagEditT(item, done.id, contentInfo)"><i class="fa fa-edit card_icon"></i></button>
-                            <button type="button" class="btn btn-sm" (click)="undelete(item._id, done.id, contentTrash)"><i class="fa fa-trash card_icon" ></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
-</div>
-
-
-
-<!-- Message to small screen -->
-<div class="center_to_center d-md-none">
-    <h4 class="txt_sorry">Sorry, it is not yet available for mobiles.</h4>
-</div>
-
-
-
-
-
-
-
-
-
-
 
 
 
 <!-- MODAL ADD-->
 <ng-template #contentInfo let-modal>
     <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Add task</h4>
+        <h4 class="modal-title" id="modal-basic-title">TASK</h4>
     </div>
     <div class="modal-body">
         <div class="form-group">
@@ -134,7 +88,7 @@
                 <div class="form-group">
                     <label for="recipient-name" class="col-form-label">State:</label>
                     <select class="form-control" id="sel1" name="state_name" [(ngModel)]="state_name" (ngModelChange)="setStateID($event)">
-                        <option *ngFor="let state of states">{{state.name}}</option>
+                        <option *ngFor="let state of array_states">{{state.name}}</option>
                     </select>
                 </div>
             </div>
@@ -145,6 +99,23 @@
         </div>
     </div>    
 </ng-template>
+
+<!-- MODAL ADD STATE-->
+<ng-template #contentState let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">STATE</h4>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Name:</label>
+                <input type="text" class="form-control" id="name" [(ngModel)]="post_state_name">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="closeModal()">Cancel</button>
+                <button  type="button" class="btn btn-outline-dark" (click)="actionInfoState()">Acept</button>                    
+            </div>
+        </div>    
+    </ng-template>
 
 <ng-template #contentTrash let-modal>
     <div class="modal-header">
