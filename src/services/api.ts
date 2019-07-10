@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/internal/observable'
+import { Observable } from 'rxjs/internal/Observable'
 
 const httpOptions = {
     headers: new HttpHeaders({
